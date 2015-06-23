@@ -1,0 +1,54 @@
+body, header, footer, section, article, nav, aside, details{
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Trebuchet MS", geneva, verdana, helvetica, sans-serif;
+}
+
+nav a{
+  text-decoration: none;
+  padding: 2px;
+}
+
+a:visited{
+  color: black;
+}
+
+nav span, a:hover{
+  padding: 2px;
+  border-radius: 5px;
+  background: blue;
+  color: white;
+}
+
+nav header{
+  font-size: .5em;  
+}
+
+section{
+  float:left;
+  border: none;
+  width: 70%
+}
+
+article{
+  border: solid thin black;
+}
+
+aside{
+  float:right;
+  width: 25%;
+}
+
+section header{
+  padding: 0;
+}
+
+footer{
+  background: lightblue;
+  clear: both;
+  text-align: center;
+}
+
+#titlebar{
+  background: lightyellow;
+}
