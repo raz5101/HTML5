@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Dynamic Histogram</title>
+	
+	<style>
+		body{
+			font-family:Helvetica;
+		}
+		#myCanvas{
+			border: 1px solid black;
+		}
+		textarea{
+			height: 100px;
+			width: 200px;
+		}
+	</style>
+	
+	<script>
+		var canvas, ctx;
+		var sp = 25;
+
+		//draw a histogram bar of height h
+		function drawBar(h) {
+		
+			//draw the bar of length specified by current data value (multiplied by 10 for easier viewing)
+			ctx.fillRect(0,-(h*10),20,h*10);
+
+			//draw the number above the bar
+			ctx.fillText(h,5,0-(h*10)-10);
+
+			//translate to next start point
+			ctx.translate(sp,0);
+		}
+		
+		//extract entered data from textarea
+		function parseEntry() {
+			//read the textarea 
+			var strSource = document.querySelector("#dataPoints");
+			var str = strSource.value;
+
+			//separate into an array
+			var items = str.split(" ");
+			
+			//clear the previous drawing, if any
+			ctx.clearRect(0,0,300,300);
+
+			//save context state, set pointer and color
+			ctx.save();
+			ctx.translate(0,300);
+			ctx.fillStyle = "black";
+			
+			//iterate through the array and create a bar for each item
+			for (var i = 0; i < items.length; i++){
+				drawBar(items[i]);
+			}
+			
+			//restore previous context state
+			ctx.restore();
+
+			//reset page for next entry
+			var str = document.querySelector("#dataPoints");
+			str.value = "";
+		}
+			
+		//execute on page load
+		function init() {
+			//get canvas
+			canvas = document.querySelector("#myCanvas");
+
+			//get context
+			ctx = canvas.getContext("2d");
+  		}
+
+	</script>
+</head>
+
+<body onload="init();">
+	<header><h1>HTML5 Exercises</h1></header>
+	<section float="left">
+		<header><h2>Dynamic Histogram</h2></header>
+		<form>
+			Please enter up to 12 numbers (1-30), each separated by a space.</br>
+			When finished, click the 'Draw Graph' button.</br>
+			<textarea id="dataPoints" autofocus = "true">
+			</textarea>
+			<input type="button" value="Draw Graph" onclick="parseEntry()";"/>
+		</form>
+	<canvas id="myCanvas" width="300" height="300">
+	</canvas>
+	</section>
+</body>
+</html>
